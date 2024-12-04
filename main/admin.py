@@ -33,3 +33,15 @@ class Diary (ModelAdmin):
 @admin.register(models.Task_table)
 class TaskTable (ModelAdmin):
     list_display = ['id']
+
+@admin.register(models.Assignment)
+class Assignment (ModelAdmin):
+    list_display = ['id','deadline']
+
+@admin.register(models.AssignmentStatus)
+class AssignmentStatus (ModelAdmin):
+    list_display = ['id','completed']
+
+@admin.register(models.Family)
+class Family (ModelAdmin):
+    list_display = ['id','fullname']

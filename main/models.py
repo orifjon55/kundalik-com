@@ -50,7 +50,7 @@ class Student(models.Model): #o'quvchi
     task_table = models.ForeignKey(Task_table,on_delete=models.CASCADE,null=True)
     
     def __str__(self):
-        return str (self.grade)
+     return f"Grade: {self.grade}, Fullname: {self.fullname}"
 
 class Teacher(models.Model): #oqituvchi
     fullname = models.CharField(max_length=50)
@@ -58,6 +58,39 @@ class Teacher(models.Model): #oqituvchi
     lesson_table = models.TextField()
     lesson = models.TextField()
     task_table = models.ForeignKey(Task_table,on_delete=models.CASCADE,null=True)
+    subject = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.fullname
+
+class Assignment(models.Model): #vazifa
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='assignments')
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    deadline = models.DateField()
+
+    def __str__(self):
+        return self.title
+
+class AssignmentStatus(models.Model): #vazifa satusi
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='assignments_status')
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, related_name='statuses')
+    completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.student.fullname} - {self.assignment.title} - {'Bajarildi' if self.completed else 'Bajarilmagan'}"
+    
+class Family(models.Model): #ota ona
+    fullname = models.CharField(max_length=100)
+    student = models.ManyToManyField(Student)
+    rating = models.ForeignKey(Rating, on_delete=models.CASCADE, null=True)
+    school = models.ForeignKey(School,on_delete=models.CASCADE, null=True)
+    asgiment = models.ForeignKey(AssignmentStatus, on_delete=models.CASCADE, null=True)
+    teacher = models.ManyToManyField(Teacher, name='teacher_family')
+    principal = models.ForeignKey(Principal, on_delete=models.CASCADE, null=True)
+    tastable = models.ManyToManyField(Task_table, name='table_family')
+    diary = models.ForeignKey(Diary, on_delete=models.CASCADE, null = True)
+    grade = models.ForeignKey(Grade, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.fullname

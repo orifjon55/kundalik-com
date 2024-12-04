@@ -1,3 +1,4 @@
-O'quvchi -> maktabi, bahosi, sinfi, kundaligi, darsjadvali, uyvazifasi
+O'quvchi -> Ismi Familya, Yoshi, Qizqshi, maktabi, bahosi, sinfi, kundaligi, darsjadvali, uyvazifasi
 O'qituvchi -> Sinfi, Dars Otish Jadvali, Baholar Qoyish, Hisobotlar, Dars jadvali
 Zavuch -> Dars Jadval Joylash
+Ota Ona

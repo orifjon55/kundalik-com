@@ -12,12 +12,12 @@ class CustomPagination(PageNumberPagination):
     max_page_size = 5
 
 class TeachersView(ListAPIView):
-    queryset = md.Teacher.objects.all()
+    queryset = md.Teacher.objects.all().order_by('id')
     serializer_class = ser.TeachersSer
     pagination_class = CustomPagination
 
 class TeacherSearch(ListAPIView):
-    queryset = md.Teacher.objects.all()
+    queryset = md.Teacher.objects.all().order_by('id')
     serializer_class = ser.TeachersSer
     filter_backends = [filters.SearchFilter,DjangoFilterBackend]
     search_fields = ['fullname']
