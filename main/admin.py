@@ -30,7 +30,7 @@ class Grade (ModelAdmin):
 class Diary (ModelAdmin):
     list_display = ['id','rating']
 
-@admin.register(models.Task_table)
+@admin.register(models.TaskTable)
 class TaskTable (ModelAdmin):
     list_display = ['id']
 

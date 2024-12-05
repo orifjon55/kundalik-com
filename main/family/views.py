@@ -16,10 +16,5 @@ class Family(ListAPIView):
     queryset = md.Family.objects.all().order_by('id')
     serializer_class = ser.FamilySer
     pagination_class = CustomPagination
-
-class FamilySearch(ListAPIView):
-    queryset = md.Family.objects.all().order_by('id')
-    serializer_class = ser.FamilySer
-    filter_backends = [filters.SearchFilter,DjangoFilterBackend]
     search_fields = ['fullname']
     filterset_fields = '__all__'

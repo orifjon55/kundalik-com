@@ -21,15 +21,9 @@ class WorkView(APIView):
         return Response(serializer.data)
     
     
-class WorkStatus(APIView):
-    def get(request,self,format = None):
-        model = md.AssignmentStatus.objects.all()
-        serializer = ser.WorkStatusSer(model,many = True)
-        return Response(serializer.data)
+class WorkStatus(ListAPIView):
+    queryset = md.AssignmentStatus.objects.all().order_by('-id')
+    serializer_class = ser.WorkStatusSer
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
+    filterset_fields = ['student', 'assignment','completed']
     
-class WorkSearch(ListAPIView):
-    queryset = md.Assignment.objects.all().order_by('id')
-    serializer_class = ser.WorkSer
-    filter_backends = [filters.SearchFilter,DjangoFilterBackend]
-    search_fields = ['fullname']
-    filterset_fields = '__all__'

@@ -15,10 +15,6 @@ class StudentView(ListAPIView):
     queryset = md.Student.objects.all().order_by('id')
     serializer_class = ser.StudentSer
     pagination_class = CustomPagination
-
-class SearchViews(ListAPIView):
-    queryset = md.Student.objects.all().order_by('id')
-    serializer_class = ser.StudentSer
     filter_backends = [filters.SearchFilter,DjangoFilterBackend]
     search_fields = ['fullname']
-    filterset_fields = '__all__'
+    filterset_fields = ['grade','school','diary','tasktable']

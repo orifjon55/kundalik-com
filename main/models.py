@@ -25,7 +25,7 @@ class Diary(models.Model): #kundalik
     def __str__(self):
         return str (self.rating)
 
-class Task_table(models.Model): #dars jadvali
+class TaskTable(models.Model): #dars jadvali
     table = models.TextField()
 
     def __str__(self):
@@ -34,7 +34,7 @@ class Task_table(models.Model): #dars jadvali
 class Principal(models.Model): #zamdiriktor
     fullname = models.CharField(max_length=100)
     create_data = models.DateField(auto_now_add=True)
-    table = models.ForeignKey(Task_table,on_delete=models.CASCADE,null=True)
+    table = models.ForeignKey(TaskTable,on_delete=models.CASCADE,null=True)
 
 
     def __str__(self):
@@ -47,7 +47,7 @@ class Student(models.Model): #o'quvchi
     grade = models.ForeignKey(Grade,on_delete=models.SET_NULL,null=True)
     school = models.ForeignKey(School,on_delete=models.SET_NULL,null=True)
     diary = models.ForeignKey(Diary,on_delete=models.CASCADE,null=True)
-    task_table = models.ForeignKey(Task_table,on_delete=models.CASCADE,null=True)
+    tasktable = models.ForeignKey(TaskTable,on_delete=models.CASCADE,null=True)
     
     def __str__(self):
      return f"Grade: {self.grade}, Fullname: {self.fullname}"
@@ -55,9 +55,9 @@ class Student(models.Model): #o'quvchi
 class Teacher(models.Model): #oqituvchi
     fullname = models.CharField(max_length=50)
     grade = models.ForeignKey(Grade,on_delete=models.CASCADE,null=True)
-    lesson_table = models.TextField()
+    lessontable = models.TextField()
     lesson = models.TextField()
-    task_table = models.ForeignKey(Task_table,on_delete=models.CASCADE,null=True)
+    tasktable = models.ForeignKey(TaskTable,on_delete=models.CASCADE,null=True)
     subject = models.CharField(max_length=100)
 
     def __str__(self):
@@ -88,7 +88,7 @@ class Family(models.Model): #ota ona
     asgiment = models.ForeignKey(AssignmentStatus, on_delete=models.CASCADE, null=True)
     teacher = models.ManyToManyField(Teacher, name='teacher_family')
     principal = models.ForeignKey(Principal, on_delete=models.CASCADE, null=True)
-    tastable = models.ManyToManyField(Task_table, name='table_family')
+    tastable = models.ManyToManyField(TaskTable, name='table_family')
     diary = models.ForeignKey(Diary, on_delete=models.CASCADE, null = True)
     grade = models.ForeignKey(Grade, on_delete=models.CASCADE, null=True)
 
