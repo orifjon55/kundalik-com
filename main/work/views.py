@@ -11,16 +11,14 @@ class CustomPagination(PageNumberPagination):
     page_size = 2
     page_size_query_param = 'page_size'
     max_page_size = 5
-
-
+# ===============================================
 class WorkView(APIView):
     def get(request,self,format = None):
         model = md.Assignment.objects.all()
         serializer = ser.WorkSer(model,many = True)
         pagination_class = CustomPagination
         return Response(serializer.data)
-    
-    
+# ===============================================    
 class WorkStatus(ListAPIView):
     queryset = md.AssignmentStatus.objects.all().order_by('-id')
     serializer_class = ser.WorkStatusSer

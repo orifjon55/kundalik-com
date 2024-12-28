@@ -10,11 +10,11 @@ class CustomPagination(PageNumberPagination):
     page_size = 2
     page_size_query_param = 'page_size'
     max_page_size = 5
-
+# ===============================================
 class PrincipalView(ListAPIView):
     queryset = md.Principal.objects.all().order_by('id')
     serializer_class = ser.PrincipalSer
     pagination_class = CustomPagination
     filter_backends = [filters.SearchFilter,DjangoFilterBackend]
     search_fields = ['fullname']
-    filterset_fields = ['table']
+    filterset_fields = ['table']    

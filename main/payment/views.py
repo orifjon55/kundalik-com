@@ -1,20 +1,21 @@
 from django.shortcuts import render
-from rest_framework.generics import ListAPIView
+from . import serializers as ser
 from main import models as md
-from .import serializers as ser
+from rest_framework.generics import ListAPIView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework.pagination import PageNumberPagination
 
-class CustomPagination(PageNumberPagination):
+
+class CustomPaginator(PageNumberPagination):
     page_size = 2
     page_size_query_param = 'page_size'
     max_page_size = 5
 # ===============================================
-class StudentView(ListAPIView):
-    queryset = md.Student.objects.all().order_by('id')
-    serializer_class = ser.StudentSer
-    pagination_class = CustomPagination
+class PaymentView(ListAPIView):
+    queryset = md.EMaktabPayment.objects.all().order_by('id')
+    serializer_class = ser.PaymentSer
+    pagination_clas = CustomPaginator
     filter_backends = [filters.SearchFilter,DjangoFilterBackend]
     search_fields = ['fullname']
-    filterset_fields = ['grade','school','diary','tasktable']
+    filterset_fields = ['school','student']

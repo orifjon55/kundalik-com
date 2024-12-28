@@ -11,7 +11,7 @@ class CustomPagination(PageNumberPagination):
     page_size = 2
     page_size_query_param = 'page_size'
     max_page_size = 5
-
+# ===============================================
 class Family(ListAPIView):
     queryset = md.Family.objects.all().order_by('id')
     serializer_class = ser.FamilySer
